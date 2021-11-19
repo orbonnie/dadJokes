@@ -1,16 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { getJokesByKeyword } = require('./helpers/getJokes');
+const { getRandomJokes } = require('./helpers/getJokes');
 
 let app = express();
 
-// app.use(express.static(__dirname + '/../client/root'));
+// app.use('/', express.static(__dirname + '/../client/root'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send('hello');
-})
+app.get('/search', (req, res) => {
+  console.log('req body: ', req.body);
+  // let jokes = getJokesByKeyword('happy');
+  res.send('found search GET');
+});
 
-let port = 1128;
+app.get('/random', (req, res) => {
+  console.log('req body: ', req.body);
+  // let jokes = getJokesByKeyword('happy');
+  res.send('found random GET');
+});
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+let PORT = 1128;
+
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));

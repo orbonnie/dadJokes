@@ -8,6 +8,7 @@ class JokeSearch extends React.Component {
     }
     this.onChange = this.onChange.bind(this);
     this.search = this.search.bind(this);
+    this.generate = this.generate.bind(this);
   }
 
   onChange(e) {
@@ -19,10 +20,15 @@ class JokeSearch extends React.Component {
     this.state.keyword = '';
   }
 
+  generate() {
+    this.props.generate();
+  }
+
   render() {
     return (<div>
       <b>Customize Your Jokes </b><input value={this.state.keyword} placeholder="Enter keyword" onChange={this.onChange} />
       <button onClick={this.search}>Search</button>
+      <button onClick={this.generate}>Random Jokes</button>
     </div>)
   }
 

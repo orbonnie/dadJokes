@@ -24,24 +24,47 @@ class App extends React.Component {
         }
       ],
     };
-    // this.search.bind(this);
+
+    lists: {
+      list1: ['joke1', 'joke2', 'joke3'];
+      list2: ['joke4', 'joke5', 'joke6'];
+      list3: ['joke7', 'joke8', 'joke9'];
+    };
+    this.search.bind(this);
+  }
+
+  generate() {
+    const url = '/random';
+    $.ajax({
+      url: url,
+      type: 'GET',
+      contentType: 'application/json',
+      success: (jokes) => {
+        // jokes.forEach(joke => console.log(joke));
+        console.log(jokes);
+      }
+    })
   }
 
   search(keyword) {
-    const url = `https://icanhazdadjoke.com/search?term=${keyword}`;
-    const url2 = 'https://icanhazdadjoke.com/';
-    fetch(url2, {
-      method: GET
-    }).then(res => res.json())
-      .then(json => console.log('jokes ', json));
+    const url = '/search';
+    $.ajax({
+      url: url,
+      type: 'GET',
+      contentType: 'application/json',
+      data: JSON.stringify({ keyword: keyword }),
+      success: (jokes) => {
+        // jokes.forEach(joke => console.log(joke));
+        console.log(jokes);
+      }
+    });
   }
 
 
   render() {
-    console.log('At app render ', this.state.jokes);
     return (<div>
       <Accounts />
-      <JokeSearch keySearch={this.search.bind(this)} />
+      <JokeSearch keySearch={this.search.bind(this)} generate={this.generate.bind(this)} />
       <JokeDisplay jokes={this.state.jokes} />
     </div>)
   }
