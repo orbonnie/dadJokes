@@ -43,38 +43,15 @@ class App extends React.Component {
   }
 
   generate() {
-    // console.log('random jokes');
-
     $.get('/random', (jokes) => {
       this.setState({ heading: '', jokes: JSON.parse(jokes).results });
-    })
-    // $.ajax({
-    //   url: url,
-    //   type: 'GET',
-    //   contentType: 'application/json',
-    //   success: (jokes) => {
-    //     // jokes.forEach(joke => console.log(joke));
-    //     console.log(jokes);
-    //   }
-    // })
+    });
   }
 
   search(keyword) {
-    console.log('search jokes');
     $.post('/search', { 'keyword': keyword }, (jokes) => {
-      this.setState({ heading: `Results for ${keyword}`, jokes: JSON.parse(jokes).results });
-    })
-    // const url = '/search';
-    // $.ajax({
-    //   url: url,
-    //   type: 'GET',
-    //   contentType: 'application/json',
-    //   data: JSON.stringify({ keyword: keyword }),
-    //   success: (jokes) => {
-    //     // jokes.forEach(joke => console.log(joke));
-    //     console.log(jokes);
-    //   }
-    // });
+      this.setState({ heading: `Results for "${keyword}"`, jokes: JSON.parse(jokes).results });
+    });
   }
 
 
