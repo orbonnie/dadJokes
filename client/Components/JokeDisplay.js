@@ -6,7 +6,7 @@ const JokeDisplay = (props) => {
     <div>
       <h3>{props.heading}</h3>
       {props.jokes.map((joke) =>
-        <Joke joke={joke} key={joke.id} />
+        <Joke joke={joke} key={joke.id} save={props.save} />
       )}
     </div>
   )

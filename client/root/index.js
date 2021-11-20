@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Accounts from '../Components/Accounts';
 import JokeDisplay from '../Components/JokeDisplay';
 import JokeSearch from '../Components/JokeSearch';
+import ListBtn from '../Components/ListBtn';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class App extends React.Component {
       heading: '',
       jokes: [],
       lists: {
+        main: [],
         list1: [
           {
             "id": "GlGBIY0wAAd",
@@ -40,7 +42,12 @@ class App extends React.Component {
     };
     this.search = this.search.bind(this);
     this.generate = this.generate.bind(this);
+    this.showLists = this.showLists.bind(this);
+    this.save = this.save.bind(this);
+    this.createList = this.createList.bind(this);
   }
+
+
 
   generate() {
     $.get('/random', (jokes) => {
@@ -54,12 +61,27 @@ class App extends React.Component {
     });
   }
 
+  showLists() {
+    console.log(this.state.lists);
+  }
+
+  save(joke) {
+    this.state.lists.main.push(joke);
+    console.log(this.state.lists.main);
+  }
+
+  createList(name) {
+    this.state.lists[name] = [];
+    console.log(this.state.lists);
+  }
+
 
   render() {
     return (<div>
       <Accounts />
+      <ListBtn showLists={this.showLists} createList={this.createList} lists={this.lists} />
       <JokeSearch keySearch={this.search} generate={this.generate} />
-      <JokeDisplay jokes={this.state.jokes} heading={this.state.heading} />
+      <JokeDisplay jokes={this.state.jokes} heading={this.state.heading} save={this.save} />
     </div>)
   }
 }
