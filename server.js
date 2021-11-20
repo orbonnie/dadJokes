@@ -1,26 +1,39 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { getJokesByKeyword } = require('./helpers/getJokes');
-const { getRandomJokes } = require('./helpers/getJokes');
+const { getJokesByKeyword } = require('./helpers/getJokesByKeyword');
+const { getRandomJokes } = require('./helpers/getRandomJokes');
+const dotenv = require('dotenv');
+
+dotenv.config({ path: './config/config.env' });
 
 let app = express();
 
-// app.use('/', express.static(__dirname + '/../client/root'));
+console.log(__dirname + '/client/root');
+app.use(express.static(__dirname + '/client/root'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/search', (req, res) => {
-  console.log('req body: ', req.body);
-  // let jokes = getJokesByKeyword('happy');
-  res.send('found search GET');
+app.post('/search', (req, res) => {
+  console.log('req.body ', req.body);
+  getJokesByKeyword(req.body.keyword, (err, results) => {
+    if (err) {
+      console.log('Keyword API error: ', err);
+    } else {
+      res.send(results);
+    }
+  });
 });
 
 app.get('/random', (req, res) => {
-  console.log('req body: ', req.body);
-  // let jokes = getJokesByKeyword('happy');
-  res.send('found random GET');
+  getRandomJokes((err, results) => {
+    if (err) {
+      console.log('Random API error: ', err);
+    } else {
+      res.send(results);
+    }
+  });
 });
 
-let PORT = 1128;
+const PORT = process.env.PORT || 1128;
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

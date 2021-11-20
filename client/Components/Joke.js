@@ -1,7 +1,10 @@
 import React from 'react';
 
 const Joke = (props) => (
-  <div>{props.joke.joke}</div>
+  <div>
+    <div>{props.joke.joke}</div>
+    <hr />
+  </div>
 )
 
 export default Joke;

@@ -2,11 +2,11 @@
   "name": "hr-rpp32-mvp",
   "version": "1.0.0",
   "description": "Dad Jokes",
-  "main": "server/server.js",
+  "main": "server.js",
   "scripts": {
     "dev": "webpack --watch",
     "build": "webpack",
-    "server": "npx nodemon server/index.js"
+    "server": "npx nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
   "homepage": "https://github.com/orbonnie/hr-rpp32-mvp#readme",
   "dependencies": {
     "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "jquery": "^3.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

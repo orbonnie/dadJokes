@@ -29,6 +29,7 @@ class JokeSearch extends React.Component {
       <b>Customize Your Jokes </b><input value={this.state.keyword} placeholder="Enter keyword" onChange={this.onChange} />
       <button onClick={this.search}>Search</button>
       <button onClick={this.generate}>Random Jokes</button>
+      <br /> <br /> <br />
     </div>)
   }
 
