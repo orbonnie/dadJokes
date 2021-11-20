@@ -4,7 +4,7 @@ const ListBtn = (props) => (
   <div>
     <br />
     <button onClick={props.showLists} lists={props.lists}>My Lists</button>
-    <button onClick={props.createList}>Create a Lists</button>
+    <button onClick={props.createList}>Create a List</button>
     <br /> <br />
   </div>
 )

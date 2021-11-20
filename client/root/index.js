@@ -5,6 +5,7 @@ import Accounts from '../Components/Accounts';
 import JokeDisplay from '../Components/JokeDisplay';
 import JokeSearch from '../Components/JokeSearch';
 import ListBtn from '../Components/ListBtn';
+import ListClass from '../Components/ListClass';
 
 class App extends React.Component {
   constructor(props) {
@@ -70,7 +71,8 @@ class App extends React.Component {
     console.log(this.state.lists.main);
   }
 
-  createList(name) {
+  createList() {
+    alert
     this.state.lists[name] = [];
     console.log(this.state.lists);
   }

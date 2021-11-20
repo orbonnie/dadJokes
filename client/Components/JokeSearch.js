@@ -3,6 +3,7 @@ import React from 'react';
 class JokeSearch extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       keyword: ''
     }
