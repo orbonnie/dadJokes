@@ -5,7 +5,7 @@ import Accounts from '../Components/Accounts';
 import JokeDisplay from '../Components/JokeDisplay';
 import JokeSearch from '../Components/JokeSearch';
 import ListBtn from '../Components/ListBtn';
-import ListClass from '../Components/ListClass';
+import Faves from '../Components/Faves';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,77 +13,96 @@ class App extends React.Component {
     this.state = {
       heading: '',
       jokes: [],
-      lists: {
-        main: [],
-        list1: [
-          {
-            "id": "GlGBIY0wAAd",
-            "joke": "How much does a hipster weigh? An instagram."
-          },
-          {
-            "id": "xc21Lmbxcib",
-            "joke": "How did the hipster burn the roof of his mouth? He ate the pizza before it was cool."
-          }
-        ],
-        list2: [
-          {
-            "id": "M7wPC5wPKBd",
-            "joke": "Did you hear the one about the guy with the broken hearing aid? Neither did he."
-          },
-          {
-            "id": "MRZ0LJtHQCd",
-            "joke": "What do you call a fly without wings? A walk."
-          },
-          {
-            "id": "usrcaMuszd",
-            "joke": "What's the worst thing about ancient history class? The teachers tend to Babylon."
-          }
-        ]
-      },
-    };
+      favorite: {
+        isFave: false,
+        save: 'inline',
+        delete: 'none'
+      }
+    }
+
     this.search = this.search.bind(this);
     this.generate = this.generate.bind(this);
     this.showLists = this.showLists.bind(this);
     this.save = this.save.bind(this);
+    this.delete = this.delete.bind(this);
     this.createList = this.createList.bind(this);
+    this.showFaves = this.showFaves.bind(this);
   }
-
-
 
   generate() {
     $.get('/random', (jokes) => {
       this.setState({ heading: '', jokes: JSON.parse(jokes).results });
     });
+    this.setState(prevState => ({
+      favorite: {
+        ...prevState.save,
+        save: 'inline',
+        ...prevState.delete,
+        delete: 'none'
+      }
+    }));
   }
 
   search(keyword) {
     $.post('/search', { 'keyword': keyword }, (jokes) => {
       this.setState({ heading: `Results for "${keyword}"`, jokes: JSON.parse(jokes).results });
     });
-  }
-
-  showLists() {
-    console.log(this.state.lists);
+    this.setState(prevState => ({
+      favorite: {
+        ...prevState.save,
+        save: 'inline',
+        ...prevState.delete,
+        delete: 'none'
+      }
+    }));
   }
 
   save(joke) {
-    this.state.lists.main.push(joke);
-    console.log(this.state.lists.main);
+    $.post('/faves', { joke: joke });
   }
 
-  createList() {
-    alert
-    this.state.lists[name] = [];
-    console.log(this.state.lists);
+  delete(joke) {
+    $.ajax({
+      url: '/faves',
+      type: 'DELETE',
+      data: { joke: joke },
+      success: () => console.log('joke deleted')
+    });
+    this.showFaves();
   }
 
+  showFaves() {
+    $.get('/faves', (jokes) => {
+      this.setState({ heading: 'Favorites', jokes: jokes });
+    });
+    this.setState(prevState => ({
+      favorite: {
+        ...prevState.save,
+        save: 'none',
+        ...prevState.delete,
+        delete: 'inline'
+      }
+    }));
+  }
+
+  // createList() {
+  //   alert
+  //   this.state.lists[name] = [];
+  //   console.log(this.state.lists);
+  // }
+
+  // showLists() {
+  //   console.log(this.state.lists);
+  // }
+  // <Accounts />
+  // <ListBtn showLists={this.showLists} createList={this.createList} lists={this.lists} />
 
   render() {
-    return (<div>
-      <Accounts />
-      <ListBtn showLists={this.showLists} createList={this.createList} lists={this.lists} />
+    return (<div className="container">
+      <h1>DAD JOKE GENERATOR</h1>
+      <Faves showFaves={this.showFaves} className="header" />
       <JokeSearch keySearch={this.search} generate={this.generate} />
-      <JokeDisplay jokes={this.state.jokes} heading={this.state.heading} save={this.save} />
+      <JokeDisplay jokes={this.state.jokes} heading={this.state.heading} save={this.save} delete={this.delete} buttons={this.state.favorite} />
     </div>)
   }
 }
