@@ -12,7 +12,7 @@ dotenv.config({ path: './config/config.env' });
 
 let app = express();
 
-app.use(express.static(__dirname + '/client/root'));
+app.use(express.static(__dirname + '/client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -52,6 +52,6 @@ app.get('/faves', (req, res) => {
     .then(response => res.send(response))
     .catch(err => console.log('Error getting jokes from DB: ', err));
 })
-const PORT = process.env.PORT || 1128;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

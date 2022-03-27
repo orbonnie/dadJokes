@@ -4,9 +4,8 @@
   "description": "Dad Jokes",
   "main": "server.js",
   "scripts": {
-    "dev": "webpack --watch",
-    "build": "webpack",
-    "server": "npx nodemon server.js"
+    "build": "webpack --watch",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",

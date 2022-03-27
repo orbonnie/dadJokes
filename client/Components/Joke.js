@@ -10,6 +10,7 @@ class Joke extends React.Component {
       save: 'inline',
       delete: 'none'
     };
+
     this.onSaveClick = this.onSaveClick.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
   }
@@ -33,7 +34,7 @@ class Joke extends React.Component {
     };
 
     return (
-      <div>
+      <div className='joke'>
         <div><FaSave className="save" onClick={() => this.props.save(this.props.joke)} style={saveStyle} /> {this.props.joke.joke} <IoRemoveCircle onClick={() => this.props.delete(this.props.joke)} style={deleteStyle} /> </div>
         <hr />
       </div>

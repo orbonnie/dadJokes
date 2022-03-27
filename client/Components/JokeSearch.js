@@ -16,9 +16,12 @@ class JokeSearch extends React.Component {
     this.setState({ keyword: e.target.value });
   }
 
-  search() {
+  search(e) {
+    if (this.state.keyword.length > 0) {
     this.props.keySearch(this.state.keyword);
     this.state.keyword = '';
+    }
+    e.preventDefault();
   }
 
   generate() {
@@ -26,14 +29,18 @@ class JokeSearch extends React.Component {
   }
 
   render() {
-    return (<div>
+    return (
+    <div>
       <button onClick={this.generate}>Random Jokes</button>
-      <br /> <br />
-      <b>Customize Your Jokes </b><input value={this.state.keyword} placeholder="Enter keyword" onChange={this.onChange} />
-      <button onClick={this.search}>Search</button>
-
-      <br /> <br /> <br />
-    </div>)
+      <form className='search'>
+        <label>
+          <b className='searchLabel'>Customize Your Jokes </b>
+          <input value={this.state.keyword} placeholder="Enter keyword" onChange={this.onChange} />
+        </label>
+        <button onClick={(e) => this.search(e)}>Search</button>
+      </form>
+    </div>
+    )
   }
 }
 

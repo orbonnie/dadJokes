@@ -2,9 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.join(__dirname, "client", "root", "index.js"),
+  entry: path.join(__dirname, "client", "dist", "index.js"),
   output: {
-    path: path.resolve(__dirname, "client", "root"),
+    path: path.resolve(__dirname, "client", "dist"),
   },
   module: {
     rules: [
