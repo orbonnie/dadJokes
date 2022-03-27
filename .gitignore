@@ -12,7 +12,7 @@ coverage
 .grunt
 
 build/
-dist/
+main.js
 
 node_modules/
 bower_components/
