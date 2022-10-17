@@ -31,7 +31,7 @@ class JokeSearch extends React.Component {
   render() {
     return (
     <div>
-      <button onClick={this.generate}>Random Jokes</button>
+      <button onClick={this.generate}>Random Joke</button>
       <form className='search'>
         <label>
           <b className='searchLabel'>Customize Your Jokes </b>

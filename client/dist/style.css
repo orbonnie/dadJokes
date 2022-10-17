@@ -11,7 +11,7 @@ h1 {
 }
 
 .search {
-  margin: 2rem 0;
+  margin: 3rem 0;
 }
 
 .searchLabel {
@@ -20,7 +20,9 @@ h1 {
 
 .joke {
   margin: 1rem 0;
-  font-size: 1rem;
+  font-size: 1.25rem;
+  /* background-color: whitesmoke; */
+  width: 90%;
 }
 
 .jokeContainer {
@@ -69,4 +71,8 @@ button:hover:after {
 
 .header {
   margin-left: 5em;
+}
+
+.hide {
+  display: none;
 }
